@@ -35,13 +35,12 @@ def conn_strings(env):
     staging_config['password'] = 'root'
 
     def make(envi):
-        a = envi
-        template = '{0}://{1}:{2}@{3}:{4}/{5}'.format(a['dialect'],
-                                                      a['user name'],
-                                                      a['password'],
-                                                      a['host'],
-                                                      a['port'],
-                                                      a['database name'])
+        template = '{0}://{1}:{2}@{3}:{4}/{5}'.format(envi['dialect'],
+                                                      envi['user name'],
+                                                      envi['password'],
+                                                      envi['host'],
+                                                      envi['port'],
+                                                      envi['database name'])
         return template
 
     if env == 'prod':
