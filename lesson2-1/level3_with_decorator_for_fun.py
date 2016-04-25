@@ -30,7 +30,7 @@ def configs():
             'password')
 
     prod_config = dict(zip(keys, prod_config))
-    staging_config = deepcopy(prod_config)
+    staging_config = prod_config.copy()
     staging_config['host'] = 'semantic.amazonaws-staging.com'
     staging_config['password'] = 'root'
     configs = {'prod': prod_config, 'staging': staging_config}
