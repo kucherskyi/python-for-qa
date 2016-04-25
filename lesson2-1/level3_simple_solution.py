@@ -33,7 +33,7 @@ def conn_strings(env):
     staging_config = deepcopy(prod_config)
     staging_config['host'] = 'semantic.amazonaws-staging.com'
     staging_config['password'] = 'root'
-    
+
     def make(envi):
         a = envi
         template = '{0}://{1}:{2}@{3}:{4}/{5}'.format(a['dialect'],
@@ -43,13 +43,12 @@ def conn_strings(env):
                                                       a['port'],
                                                       a['database name'])
         return template
-    
+
     if env == 'prod':
         return make(prod_config)
     elif env == 'staging':
         return make(staging_config)
     else:
-        raise Exception ("Not valid environment")
-        
-print conn_strings('staging')
+        raise Exception("Not valid environment")
 
+print conn_strings('staging')

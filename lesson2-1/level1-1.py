@@ -5,6 +5,7 @@ Write a program to calculate expression:
 ------  + ------------------- - 6(- + h)
   3               f               g
 """
+
 from __future__ import division
 
 a = 32

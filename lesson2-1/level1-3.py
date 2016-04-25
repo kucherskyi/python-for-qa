@@ -2,15 +2,21 @@
 Print unique elements from any given list or tuple.
 """
 
+import random
+
+
 def unique(given):
-    
+
     return "List of unique elements :{}".format(list(set(given)))
 
 """
-Example
+Examples
 """
-a = [1,'aaa', 2, 3, 4, 5,'aaa', 6,5,6,3,4,2]
-b = (1,'aaa', 2, 3, 4, 5,'aaa', 6,5,6,3,4,2)
 
-print unique(a)
-print unique(b)
+l = [random.randint(0, 100) for i in range(50)]
+t = tuple(random.randint(0, 100) for i in range(50))
+
+print "List " + str(l)
+print unique(l)
+print "Tuple " + str(t)
+print unique(t)

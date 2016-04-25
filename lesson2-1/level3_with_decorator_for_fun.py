@@ -57,6 +57,6 @@ def conn_strings(env):
     elif env == 'staging':
         return configs()['staging']
     else:
-        raise Exception ("Not valid environment")
+        raise Exception("Not valid environment")
 
 print conn_strings('staging')
