@@ -4,7 +4,7 @@ Having tuple ('postgresql', 'semantic.amazonaws-prod.com', 5432, 'semantic',
 (dialect, host, port, database name, user name, password), program should:
 
 -create prod_config dictionary, where dict keys are connection properties
-names and dict values are appropriate values from the input tuple;
+names and dict values are appropriate values from input tuple;
 -create staging_config dictionary with the same keys and values as prod_config;
 -in staging_config change host to 'semantic.amazonaws-staging.com' and
 password to 'root';
