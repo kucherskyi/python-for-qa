@@ -7,6 +7,12 @@ def remove_duplicates(li):
     if not isinstance(li, list):
         return 'Not a list'
     else:
-        return [elem for elem in li if li.count(elem) == 1]
+        dic = {}
+        for elem in li:
+            if not elem in dic:
+                dic[elem] = 1
+            else:
+                dic[elem] +=1
+        return [key for key, val in dic.items() if val == 1]
 
 print (remove_duplicates([1, 2, 3, 4, 4, 6, 2]))

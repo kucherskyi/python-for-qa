@@ -7,22 +7,20 @@ contain strings and boolean values (do not count them too)
 
 
 def sum_list(arr):
-    array_sum = 0
-    array_edited = [elem for elem in arr if isinstance(elem, int) 
-                    and not isinstance(elem, bool)]
-    if len(array_edited) == 0:
-        return 0
+    
+    array_sum = []
+    for elem in arr:
+        if elem == 13:
+            break
+        else:
+            if isinstance(elem, int) and not isinstance(elem, bool):
+                array_sum.append(elem)
+    
+    return sum(array_sum)
 
-    if 13 in array_edited:
-        for i in array_edited[:array_edited.index(13)]:
-            array_sum += i
-        return array_sum
-    else:
-        return sum(array_edited)
-
-a = [1, 2, 2, 1, 5, 4, 2, 13, 'aaa',True, 'asd',False]
+a = [1, 2, 2, 1, 5, 4, 2, 'aaa',True, 'asd',False]
 b = []
-c = [1, 2, 2, 1]
+c = [1, 2, 2,13, 1]
 
 print (sum_list(a))
 print (sum_list(b))
