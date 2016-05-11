@@ -14,6 +14,10 @@ def palindrome1(wrd):
 
 
 def palindrome2(wrd):
+    """
+    I've used string module to add possibility to check, whether a sentence
+    is a palindrome, not only single word.
+    """
 
     def striper(wr):
         wr = "".join(c for c in wr if c not in string.punctuation)
