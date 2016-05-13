@@ -93,14 +93,14 @@ def req_in_time(parsed_logs):
     for elem in parsed_logs:
         if time(15, 11, 00) <= datetime.time(elem['time']) <= time(15, 26, 00):
             req_count += 1
-    return'Requests count in time range 15:11:00 - 15:26:00 : {}'.format(req_count)
+    return'Requests in time range 15:11:00 - 15:26:00 : {}'.format(req_count)
 
 
 def rate(parsed_logs):
 
     valid = 0
     for elem in parsed_logs:
-        if elem['status'].startswith('2') :
+        if elem['status'].startswith('2'):
             valid += 1
     return 'Successful requests: {}%'.format(int((float(valid) /
                                                   len(parsed_logs)) * 100))
