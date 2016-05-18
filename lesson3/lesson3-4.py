@@ -10,8 +10,6 @@ import csv
 
 def csv_parcer(file):
 
-            
-
     with open(file, 'r') as logfile:
         reader = csv.DictReader(logfile)
         with open('new_{}'.format(file), 'wb') as csv_towrite:
@@ -19,7 +17,7 @@ def csv_parcer(file):
             writer.writeheader()
             for row in reader:
                 transform = {
-                             'critical':'high',
+                             'critical': 'high',
                              'high': 'medium',
                              'medium': 'low'
                              }
@@ -29,7 +27,7 @@ def csv_parcer(file):
                     pass
                 else:
                     writer.writerow(row)
-                    
+
     print ('Done!')
 
 csv_parcer('bugs_list.csv')
