@@ -13,9 +13,23 @@ python-for-qa course. Result should look the following way:
 
 import os
 
-for i in range(1,7):
-    os.makedirs('a\lesson{}'.format(i))
-    path = os.path.join(os.getcwd(),'a\lesson{}'.format(i))
-    for t in range(1,7):
-        file = open(os.path.join(path,'\task.py'),'w')
-        
+
+def dircreator():
+
+    for i in range(1, 7):
+        if not os.path.exists('homework\lesson{}'.format(i)):
+            os.makedirs('homework\lesson{}'.format(i))
+            path = os.path.join(os.getcwd(), 'homework\lesson{}'.format(i))
+            for fold in range(1, 7):
+                name_of_file = 'atask{}.py'.format(fold)
+                path_to_file = os.path.join(path, name_of_file)
+                file = open(path_to_file, 'w')
+                if os.path.isfile(os.path.join(path, '__init__.py')):
+                    pass
+                else:
+                    file = open(os.path.join(path, '__init__.py'), 'w')
+        else:
+            print 'Directories already exists!'
+            break
+
+dircreator()
