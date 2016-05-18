@@ -29,7 +29,7 @@ def dircreator():
                 else:
                     file = open(os.path.join(path, '__init__.py'), 'w')
         else:
-            print 'Directories already exists!'
+            print ('Directories already exists!')
             break
 
 dircreator()

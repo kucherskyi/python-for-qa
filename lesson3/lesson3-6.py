@@ -66,7 +66,7 @@ def dist_status(parsed_logs):
     statuses = []
     for elem in parsed_logs:
         statuses.append(elem['status'])
-    return 'All distinct requests status codes: \n{}'.format(statuses)
+    return ('All distinct requests status codes: \n{}'.format(statuses))
 
 
 def permission_denide(parsed_logs):
@@ -75,7 +75,7 @@ def permission_denide(parsed_logs):
     for elem in parsed_logs:
         if elem['status'] == '403':
             denied.append(elem['url'])
-    return 'Access without permissions (status 403): \n{}'.format(denied)
+    return ('Access without permissions (status 403): \n{}'.format(denied))
 
 
 def created(parsed_logs):
@@ -84,7 +84,7 @@ def created(parsed_logs):
     for elem in parsed_logs:
         if elem['status'] == '201':
             creat.append(elem['url'])
-    return 'Created resources : \n{}'.format(creat)
+    return ('Created resources : \n{}'.format(creat))
 
 
 def req_in_time(parsed_logs):
@@ -93,21 +93,21 @@ def req_in_time(parsed_logs):
     for elem in parsed_logs:
         if time(15, 11, 00) <= datetime.time(elem['time']) <= time(15, 26, 00):
             req_count += 1
-    return 'Requests count in time range 15:11:00 - 15:26:00 : {}'.format(req_count)
+    return ('Requests within 15:11:00 - 15:26:00 : {}'.format(req_count))
 
 
 def rate(parsed_logs):
 
     valid = 0
     for elem in parsed_logs:
-        if elem['status'].startswith('2') :
+        if elem['status'].startswith('2'):
             valid += 1
-    return 'Successful requests: {}%'.format(int((float(valid) /
-                                                  len(parsed_logs)) * 100))
+    return ('Successful requests: {}%'.format(int((float(valid) /
+                                                  len(parsed_logs)) * 100)))
 
 
-print dist_status(parse_log())
-print permission_denide(parse_log())
-print created(parse_log())
-print req_in_time(parse_log())
-print rate(parse_log())
+print (dist_status(parse_log()))
+print (permission_denide(parse_log()))
+print (created(parse_log()))
+print (req_in_time(parse_log()))
+print (rate(parse_log()))

@@ -9,4 +9,4 @@ with open('alice_in_wonderland.txt', 'r') as alice:
     list_of_sentences = re.split(r'\b\.?\.\.?(?=\s)', alice.read())
 
 
-print 'Number of sentences is {}' .format( len(list_of_sentences))
+print ('Number of sentences is: {}' .format( len(list_of_sentences)))
