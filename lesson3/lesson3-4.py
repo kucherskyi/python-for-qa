@@ -10,17 +10,16 @@ import csv
 
 def csv_parcer(file):
 
+    transform = {'critical': 'high',
+                 'high': 'medium',
+                 'medium': 'low'}
+
     with open(file, 'r') as logfile:
         reader = csv.DictReader(logfile)
         with open('new_{}'.format(file), 'wb') as csv_towrite:
             writer = csv.DictWriter(csv_towrite, fieldnames=reader.fieldnames)
             writer.writeheader()
             for row in reader:
-                transform = {
-                             'critical': 'high',
-                             'high': 'medium',
-                             'medium': 'low'
-                             }
                 row['Priority'] = transform.get(row['Priority'],
                                                 row['Priority'])
                 if row['Priority'] == 'low':
