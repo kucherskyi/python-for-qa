@@ -9,24 +9,18 @@ Handle the case when a product is out of stock.
 
 import requests
 from lxml import etree, html
-from xml.etree.ElementTree import ParseError
-from io import StringIO, BytesIO
-import re
 
-LINK = 'http://deshevshe.ua/mobile-asus/asus_zenfone_6_a600cg_gold'
+LINK = 'http://deshevshe.ua/projector-acer/acer_c205_fwvga_150_ansi_lm_mrjh911001'
 
-responce = requests.get(LINK)
-tree = html.fromstring(responce.content)
+def parceurl(urla):
+    
+    responce = requests.get(urla)
+    tree = html.fromstring(responce.content)
+    name_item = tree.xpath('//h1[@itemprop="name"]/text()')[0]
+    price =tree.xpath('//span[@itemprop="price"]/text()')[0]
+    avaliable =tree.xpath('//div[@class="wareAvail"]/text()')[0]
+    print name_item
+    print price
+    print avaliable
 
-name_item = tree.xpath('//h1[@itemprop="name"]/text()')
-price =tree.xpath('//span[@itemprop="price"]/text()')
-pri =tree.xpath('//div[@class="wareAvail"]/text()')
-
-if 'Немає в наявності' in responce.content:
-    avalible = True
-else:
-    avalible = False
-
-print name_item[0]
-print price[0]
-print pri[0]
+parceurl(LINK)
