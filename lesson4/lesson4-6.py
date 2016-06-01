@@ -72,10 +72,9 @@ def compare(xml,json):
     
     def compval(a,b):
         dif = []
-        for v in a.values():
-            for s in b.values():
-                if  v!= s:
-                    dif.append('{}{}'.format(v, s))
+        for k in a.items():
+            for s in b.items():
+                print cmp(s, k)
         return dif
 
     differ = []
@@ -83,7 +82,7 @@ def compare(xml,json):
         for ele in json:
             if el['guid'] == ele['guid']:
                 if cmp(ele, el) != 0:
-                    differ.append(compval(el, ele))
+                    differ.append(compval(ele, el))
                     
     return differ 
     
