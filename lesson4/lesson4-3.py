@@ -7,24 +7,25 @@ author and all categories.
 import xml.etree.ElementTree as etree
 from io import StringIO
 
-fle_xml = etree.parse('habraharb_all.xml')
+a  = 'habraharb_all.xml'
+def parser(file):
+    
+    fle_xml = etree.parse(file)
+    root = fle_xml.getroot()
+    all_items = []
+    for child in root.iter('item'):
+        items = {}
+        cat = []
+        for item in child:
+            if item.tag == 'author':
+                items['author'] = item.text
+            if item.tag == 'title':
+                items['title'] = item.text
+            for category in item.iter('category'):
+                cat.append(category.text)
+            items['category'] = cat
+        all_items.append(items)   
+    return all_items
 
-root = fle_xml.getroot()
-
-alll =[]
-for child in root.iter('item'):
-    a = {}
-    z = []
-    for i in child:
-        if i.tag == 'author':
-            a['author'] = i.text
-        if i.tag == 'title':
-            a['title'] = i.text
-        for x in i.iter('category'):
-            z.append(x.text)
-        a['category'] = z
-        
-    alll.append(a)   
-
-for i in alll:
-    print i
+if __name__ == '__main__':
+    print parser(a)
