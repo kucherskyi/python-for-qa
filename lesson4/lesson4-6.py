@@ -12,12 +12,42 @@ header: X-AUTH-TOKEN
 """
 
 import json
+import collections
 
 from lxml import etree
 import requests
 import xmltodict
 
+def convert(data):
+    if isinstance(data, basestring):
+        return str(data)
+    elif isinstance(data, collections.Mapping):
+        return dict(map(convert, data.iteritems()))
+    elif isinstance(data, collections.Iterable):
+        return type(data)(map(convert, data))
+    else:
+        return data
 
+def inttostr(dic):
+    for k,v in dic.items():
+        if isinstance(v, int) or isinstance(v, float):
+            dic[k] = '{}'.format(v)
+        if isinstance(v, bool):
+            dic[k] = '{}'.format(v).lower()
+        try:
+            dic[k] = v.replace('\r\n','')
+        except:
+            pass
+        if isinstance(v, list):
+            try:
+                dic[k] = map(inttostr, v)
+            except:
+                pass
+    return dic
+
+
+        
+        
 req = requests.get('https://python-for-qa.herokuapp.com/login',
                    auth = ('admin', 'password'))
 token = json.loads(req.content)['token']
@@ -30,33 +60,33 @@ data_json = co.get(data_url, headers = {'Accept': 'application/json'} ).content
 
 z = json.dumps(xmltodict.parse(data_xml), indent=4)
 z = json.loads(z)['items']['item']
+dat222 = json.dumps(data_json)
 data_json = json.loads(data_json)
-
-for i in data_json:
-    for k,v in i.items():
-        i[k] = str(v).decode()
-        if isinstance(i[k], list):
-            i[k] = '[ {} ]'.format(str(i[k])) 
-            
-        
-    i['isActive'] = str(i['isActive']).lower()
-
-"""a1 = open('json.json','w')"""
-'''a2 = open('xml.json','w')
-a1.write(data_json)
-a2.write(json.dumps(z, indent=2))'''
+data_xml = map(convert, z)
+data_json = map(convert, data_json)
+for i in data_json: 
+    inttostr(i)
 
 
-
-def rec():
-    all_sorted = []
-    daaa = iter(data_json)
-    for i in z:
-        sss = daaa.next()
-        if i != sss:
-            print i
-            print sss
-        else:
-            rec()  
+def compare(xml,json):
     
-rec()
+    def compval(a,b):
+        dif = []
+        for v in a.values():
+            for s in b.values():
+                if  v!= s:
+                    dif.append('{}{}'.format(v, s))
+        return dif
+
+    differ = []
+    for el in xml:
+        for ele in json:
+            if el['guid'] == ele['guid']:
+                if cmp(ele, el) != 0:
+                    differ.append(compval(el, ele))
+                    
+    return differ 
+    
+
+for i in compare(data_xml, data_json):
+    print i
